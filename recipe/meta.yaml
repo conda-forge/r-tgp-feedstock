@@ -1,4 +1,4 @@
-{% set version = "2.4-22" %}
+{% set version = "2.4-22.1" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,7 +10,7 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/tgp_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/tgp/tgp_{{ version }}.tar.gz
-  sha256: c6d34dace2c9fbc1ad548a0dd4ee3964489c1f24eea05096332cc62eb06cf63e
+  sha256: 99d4a0b100b4371d617a5279f6e038af1244009b64f50bc04f265c9c4aaec4c9
 
 build:
   merge_build_host: true  # [win]
@@ -24,7 +24,9 @@ requirements:
     - cross-r-base {{ r_base }}    # [build_platform != target_platform]
     - r-maptree                    # [build_platform != target_platform]
     - {{ compiler('c') }}          # [not win]
+    - {{ stdlib("c") }}            # [not win]
     - {{ compiler('m2w64_c') }}    # [win]
+    - {{ stdlib("m2w64_c") }}      # [win]
     - {{ compiler('cxx') }}        # [not win]
     - {{ compiler('m2w64_cxx') }}  # [win]
     - {{ posix }}filesystem        # [win]
